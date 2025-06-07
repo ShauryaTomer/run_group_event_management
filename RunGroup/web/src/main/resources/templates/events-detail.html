@@ -1,0 +1,41 @@
+<html
+        xmlns:th="http://www.thymeleaf.org"
+        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+        layout:decorate="~{layout}"> <!-- adds the fragment that we add to inject -->
+<head>
+  <title>Club Detail</title>
+</head>
+
+<body class="d-flex flex-column">
+<!-- Page Content-->
+<section layout:fragment="body">
+  <header class="py-5 bg-light border-bottom mb-4">
+    <div class="container">
+      <div class="text-center my-5">
+        <h1 class="fw-bolder" th:text="${event.name}"></h1>
+        <p class="lead mb-0">Charlotte, NC</p>
+      </div>
+    </div>
+  </header>
+
+  <div class="container">
+    <div class="row">
+      <!-- Blog entries-->
+      <div class="col-lg-8">
+        <!-- Featured blog post-->
+        <div class="card mb-4">
+          <a href="#!"><img class="card-img-top" th:src="${event.photoUrl}" alt="..." /></a>
+          <div class="card-body">
+            <div class="small text-muted" th:text="${event.createdOn}"></div>
+            <h2 class="card-title">About this running club</h2>
+            <p class="card-text" th:text="${event.type}"></p>
+            <a class="btn btn-primary" th:href="@{/events/{eventId}/edit(eventId=${event.id})}">Edit Event</a> <!-- TODO:Only Owners of club can edit events -->
+            <a class="btn btn-primary , btn-danger" th:href="@{/events/{eventId}/delete(eventId=${event.id})}">Delete</a> <!--TODO:hidden from normal users, only admins can delete -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+</body>
+</html>
